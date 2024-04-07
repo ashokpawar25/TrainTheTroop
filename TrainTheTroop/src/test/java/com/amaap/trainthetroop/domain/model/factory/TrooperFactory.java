@@ -5,10 +5,8 @@ import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
-import com.amaap.trainthetroop.service.model.TroopType;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class TrooperFactory {

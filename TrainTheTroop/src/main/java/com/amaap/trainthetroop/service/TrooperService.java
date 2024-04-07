@@ -23,7 +23,7 @@ public class TrooperService {
         if (EnumSet.allOf(TroopType.class).contains(type)) {
             if (type.equals(TroopType.ARCHER)) {
                 trooper = new Archer(trainingTime, trainingCost, weapon);
-            } else if (type.equals(TroopType.BARBARIAN)) {
+            } else{
                 trooper = new Barbarian(trainingTime, trainingCost, weapon);
             }
         } else {

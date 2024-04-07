@@ -20,17 +20,15 @@ public class BarrackController {
     }
 
     public Response addTrooperToBarrack(List<Trooper> troopers) {
-        try{
+        try {
             barrackService.addTroopers(troopers);
-            return new Response(HttpStatus.OK,"Trooper added into barrack");
-        }
-        catch (BarrackFullException exception)
-        {
-            return new Response(HttpStatus.BADREQUEST,exception.getMessage());
+            return new Response(HttpStatus.OK, "Trooper added into barrack");
+        } catch (BarrackFullException exception) {
+            return new Response(HttpStatus.BADREQUEST, exception.getMessage());
         }
     }
 
     public Queue<Trooper> getTroopers() {
-        return null;
+        return barrackService.getTroopersFromBarrack();
     }
 }

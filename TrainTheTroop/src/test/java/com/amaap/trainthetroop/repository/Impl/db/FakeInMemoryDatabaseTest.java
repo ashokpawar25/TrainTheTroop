@@ -8,6 +8,7 @@ import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataExceptio
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -71,5 +72,19 @@ class FakeInMemoryDatabaseTest {
         assertEquals(5, archerCount);
         assertEquals(5, barbarianCount);
         assertEquals(10, troopersInBarrack.size());
+    }
+
+    @Test
+    void shouldBeAbleToAddTrooperInArmyCamp() throws InvalidTrooperDataException {
+        // arrange
+        Trooper expected = new Archer(6,20, Weapon.BOW_AND_ARROW);
+
+        // act
+        fakeInMemoryDatabase.insertIntoArmyCampTable(expected);
+        List<Trooper> trainedTroopers = fakeInMemoryDatabase.getTroopersFromArmyCamp();
+        Trooper actual = trainedTroopers.get(0);
+
+        // assert
+        assertEquals(expected,actual);
     }
 }

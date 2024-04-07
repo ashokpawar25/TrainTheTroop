@@ -17,12 +17,10 @@ public class TrooperController {
 
     public Response create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) throws Exception, InvalidTrooperTypeException {
         try {
-            Trooper trooper = trooperService.create(type, trainingTime, trainingCost, weapon);
+            trooperService.create(type, trainingTime, trainingCost, weapon);
             return new Response(HttpStatus.OK, "Trooper created successfully");
         } catch (InvalidTrooperTypeException e) {
             return new Response(HttpStatus.BADREQUEST, "Invalid trooper type: " + type);
-        } catch (Exception e) {
-            return new Response(HttpStatus.BADREQUEST, "An error occurred while creating trooper: " + e.getMessage());
         }
     }
 }

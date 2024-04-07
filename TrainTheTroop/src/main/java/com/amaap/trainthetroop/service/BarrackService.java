@@ -18,14 +18,11 @@ public class BarrackService {
     public void addTroopers(List<Trooper> trooperList) throws BarrackFullException {
         Queue<Trooper> trooperQueue = new LinkedList<>();
         int queueSize = 0;
-        while (queueSize< trooperList.size()) {
-            if(trooperQueue.size()<=10)
-            {
+        while (queueSize < trooperList.size()) {
+            if (trooperQueue.size() <= 10) {
                 trooperQueue.add(trooperList.get(queueSize));
                 queueSize++;
-            }
-            else
-            {
+            } else {
                 throw new BarrackFullException("Barrack is full...!\nTry after some time");
             }
         }

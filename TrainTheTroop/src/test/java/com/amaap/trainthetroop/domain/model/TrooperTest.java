@@ -1,12 +1,28 @@
 package com.amaap.trainthetroop.domain.model;
 
+import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingCostException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingTimeException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
+import com.amaap.trainthetroop.domain.model.exception.InvalidWeaponException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrooperTest {
+
+    @Test
+    void shouldBeAbleToCreateTrooperWhenPassedDataIsValid() throws InvalidTrooperDataException {
+        // arrange
+        int trainingTime = 3;
+        int trainingCost = 10;
+        Weapon weapon = Weapon.SWORD;
+
+        // act
+        Trooper expected = new Trooper(trainingTime,trainingCost,weapon);
+
+        // assert
+        assertNotNull(expected);
+    }
 
     @Test
     void shouldThrowInvalidTrainingTimeExceptionWhenTimeIsInvalid() {
@@ -16,7 +32,28 @@ class TrooperTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        assertThrows(InvalidTrainingTimeException.class,()->new Trooper(trainingTime,trainingCost,weapon) );
+        assertThrows(InvalidTrainingTimeException.class,()->new Trooper(trainingTime,trainingCost,weapon),"Invalid training time "+trainingTime );
     }
 
+    @Test
+    void shouldThrowInvalidTrainingCostExceptionWhenCostIsInvalid() {
+        // arrange
+        int trainingTime = 3;
+        int trainingCost = -3;
+        Weapon weapon = Weapon.SWORD;
+
+        // act & assert
+        assertThrows(InvalidTrainingCostException.class,()->new Trooper(trainingTime,trainingCost,weapon) ,"Invalid training cost "+trainingCost);
+    }
+
+    @Test
+    void shouldThrowInvalidWeaponExceptionWhenWeaponIsInvalid() {
+        // arrange
+        int trainingTime = 3;
+        int trainingCost = 20;
+        Weapon weapon = null;
+
+        // act & assert
+        assertThrows(InvalidWeaponException.class,()->new Trooper(trainingTime,trainingCost,weapon) ,"Invalid weapon name "+weapon);
+    }
 }

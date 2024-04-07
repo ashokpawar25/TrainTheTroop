@@ -31,4 +31,8 @@ public class BarrackController {
     public Queue<Trooper> getTroopers() {
         return barrackService.getTroopersFromBarrack();
     }
+
+    public void trainTheTrooper() throws InterruptedException {
+        barrackService.trainTheTrooper();
+    }
 }

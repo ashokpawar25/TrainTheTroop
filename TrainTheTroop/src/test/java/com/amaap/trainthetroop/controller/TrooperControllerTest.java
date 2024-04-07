@@ -15,11 +15,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TrooperControllerTest {
-
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryTrooperRepository inMemoryTrooperRepository = new TrooperRepository(inMemoryDatabase);
-    TrooperService trooperService = new TrooperService(inMemoryTrooperRepository);
-    TrooperController trooperController = new TrooperController(trooperService);
+    
+    TrooperController trooperController = new TrooperController(new TrooperService(
+            new TrooperRepository(new FakeInMemoryDatabase())));
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {

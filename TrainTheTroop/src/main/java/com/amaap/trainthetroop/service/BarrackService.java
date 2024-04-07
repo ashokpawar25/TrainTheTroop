@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.service;
 
+import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
 import com.amaap.trainthetroop.service.exception.BarrackFullException;
@@ -31,5 +32,23 @@ public class BarrackService {
 
     public Queue<Trooper> getTroopersFromBarrack() {
         return inMemoryBarrackRepository.getTroopersFromBarrack();
+    }
+
+    public synchronized void trainTheTrooper() throws InterruptedException {
+        Queue<Trooper> troopersFromBarrack = inMemoryBarrackRepository.getTroopersFromBarrack();
+
+        while (!troopersFromBarrack.isEmpty())
+        {
+            Trooper trooper = troopersFromBarrack.poll();
+            int timeToTrain = trooper.getTrainingTime();
+            try
+            {
+                Thread.sleep(timeToTrain* 1000L);
+            }
+            catch (InterruptedException exception)
+            {
+
+            }
+        }
     }
 }

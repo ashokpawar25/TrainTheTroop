@@ -16,6 +16,8 @@ import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Queue;
 
@@ -74,5 +76,26 @@ public class BarrackControllerTest {
 
         // assert
         assertEquals(2, troopersToTrain.size());
+    }
+
+    @Test
+    void shouldBeAbleToTrainTheTrooper() throws InvalidTrooperTypeException, Exception {
+        // arrange
+        for (int i = 0; i < 5; i++) {
+            trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+            trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        }
+        long expectedTrainingTime = 45;
+
+        // act
+        List<Trooper> troopers = trooperService.getTroopers();
+        barrackController.addTrooperToBarrack(troopers);
+        LocalTime trainingStartTime = LocalTime.now();
+        barrackController.trainTheTrooper();
+        LocalTime trainingEndTime = LocalTime.now();
+        long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
+
+        // assert
+        assertEquals(expectedTrainingTime,actualTrainingTime);
     }
 }

@@ -5,9 +5,9 @@ import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
+import com.amaap.trainthetroop.repository.Impl.ArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.BarrackRepository;
-import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
+import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
 import com.amaap.trainthetroop.service.exception.BarrackFullException;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BarrackServiceTest {
 
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(inMemoryDatabase);
-    BarrackService barrackService = new BarrackService(inMemoryBarrackRepository);
+    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(new FakeInMemoryDatabase());
+    ArmyCampService armyCampService = new ArmyCampService(new ArmyCampRepository(new FakeInMemoryDatabase()));
+    BarrackService barrackService = new BarrackService(inMemoryBarrackRepository, armyCampService);
 
     @Test
     void shouldBeAbleToAddTrooperIntoBarrack() throws InvalidTrooperDataException, BarrackFullException {

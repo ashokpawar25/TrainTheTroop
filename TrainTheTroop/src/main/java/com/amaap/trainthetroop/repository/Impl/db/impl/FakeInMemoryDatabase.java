@@ -1,6 +1,7 @@
-package com.amaap.trainthetroop.repository.Impl.db;
+package com.amaap.trainthetroop.repository.Impl.db.impl;
 
 import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

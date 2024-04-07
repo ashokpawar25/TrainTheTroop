@@ -4,15 +4,13 @@ import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
-import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
+import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrooperRepositoryTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    TrooperRepository trooperRepository = new TrooperRepository(inMemoryDatabase);
+    TrooperRepository trooperRepository = new TrooperRepository(new FakeInMemoryDatabase());
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception {

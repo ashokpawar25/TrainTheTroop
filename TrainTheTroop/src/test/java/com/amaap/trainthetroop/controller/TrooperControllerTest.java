@@ -4,9 +4,7 @@ import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
-import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryTrooperRepository;
+import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
@@ -15,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TrooperControllerTest {
-    
+
     TrooperController trooperController = new TrooperController(new TrooperService(
             new TrooperRepository(new FakeInMemoryDatabase())));
 
@@ -50,7 +48,8 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldReturnBadRequestResponseWhenTrooperTypeIsInvalid() throws Exception, InvalidTrooperTypeException {
+    void shouldReturnBadRequestResponseWhenTrooperTypeIsInvalid()
+            throws Exception, InvalidTrooperTypeException {
         // arrange
         int trainingTime = 3;
         int trainingCost = 10;

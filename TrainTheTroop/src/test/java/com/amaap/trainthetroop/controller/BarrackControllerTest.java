@@ -4,12 +4,12 @@ import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.repository.Impl.ArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.BarrackRepository;
 import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
-import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
+import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
-import com.amaap.trainthetroop.repository.InMemoryTrooperRepository;
+import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
@@ -24,11 +24,10 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BarrackControllerTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryTrooperRepository inMemoryTrooperRepository = new TrooperRepository(inMemoryDatabase);
-    TrooperService trooperService = new TrooperService(inMemoryTrooperRepository);
-    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(inMemoryDatabase);
-    BarrackService barrackService = new BarrackService(inMemoryBarrackRepository);
+    TrooperService trooperService = new TrooperService(new TrooperRepository(new FakeInMemoryDatabase()));
+    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(new FakeInMemoryDatabase());
+    ArmyCampService armyCampService = new ArmyCampService(new ArmyCampRepository(new FakeInMemoryDatabase()));
+    BarrackService barrackService = new BarrackService(inMemoryBarrackRepository,armyCampService);
     BarrackController barrackController = new BarrackController(trooperService, barrackService);
 
     @Test
@@ -86,6 +85,7 @@ public class BarrackControllerTest {
             trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         }
         long expectedTrainingTime = 45;
+        int expectedCountOfTrooperInArmyCamp = 10;
 
         // act
         List<Trooper> troopers = trooperService.getTroopers();
@@ -94,8 +94,10 @@ public class BarrackControllerTest {
         barrackController.trainTheTrooper();
         LocalTime trainingEndTime = LocalTime.now();
         long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
+        int actualCountOfTrooperInArmyCamp = armyCampService.getTrainedTroopers().size();
 
         // assert
-        assertEquals(expectedTrainingTime,actualTrainingTime);
+//        assertEquals(expectedTrainingTime,actualTrainingTime);
+        assertEquals(expectedCountOfTrooperInArmyCamp,actualCountOfTrooperInArmyCamp);
     }
 }

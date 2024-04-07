@@ -10,16 +10,8 @@ import java.util.List;
 public class FakeInMemoryDatabase implements InMemoryDatabase {
     List<Trooper> trooperList = new ArrayList<>();
     @Override
-    public boolean insertIntoTrooperTable(int trainingTime, int trainingCost, Weapon weapon) {
-        Trooper trooper;
-        try {
-            trooper = new Archer(trainingTime,trainingCost,weapon);
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
+    public Trooper insertIntoTrooperTable(Trooper trooper){
         trooperList.add(trooper);
-        return true;
+        return trooper;
     }
 }

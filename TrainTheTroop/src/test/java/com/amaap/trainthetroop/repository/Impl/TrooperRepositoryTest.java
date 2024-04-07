@@ -1,7 +1,8 @@
 package com.amaap.trainthetroop.repository.Impl;
 
-import com.amaap.trainthetroop.controller.dto.HttpStatus;
-import com.amaap.trainthetroop.controller.dto.Response;
+import com.amaap.trainthetroop.domain.model.Archer;
+import com.amaap.trainthetroop.domain.model.Barbarian;
+import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
@@ -14,17 +15,34 @@ class TrooperRepositoryTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
     TrooperRepository trooperRepository = new TrooperRepository(inMemoryDatabase);
     @Test
-    void shouldBeAbleToCreateTrooperOfTypeArcher() {
+    void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception {
         // arrange
         int trainingTime = 6;
         int trainingCost = 20;
         Weapon weapon = Weapon.BOW_AND_ARROW;
-        boolean expected = true;
+        Trooper trooper = new Archer(trainingTime,trainingCost,weapon);
 
         // act
-        boolean actual = trooperRepository.insert( trainingTime, trainingCost, weapon);
+        Trooper actual = trooperRepository.insert(trooper);
+        boolean isArcher = actual instanceof Archer;
 
         // assert
-        assertEquals(expected, actual);
+        assertTrue(isArcher);
+    }
+
+    @Test
+    void shouldBeAbleToCreateTrooperOfTypeBarbarian() throws Exception {
+        // arrange
+        int trainingTime = 3;
+        int trainingCost = 10;
+        Weapon weapon = Weapon.SWORD;
+        Trooper trooper = new Barbarian(trainingTime,trainingCost,weapon);
+
+        // act
+        Trooper actual = trooperRepository.insert(trooper);
+        boolean isArcher = actual instanceof Barbarian;
+
+        // assert
+        assertTrue(isArcher);
     }
 }

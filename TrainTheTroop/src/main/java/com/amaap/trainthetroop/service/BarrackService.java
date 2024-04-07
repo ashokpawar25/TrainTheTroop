@@ -41,7 +41,7 @@ public class BarrackService {
         while (!troopersFromBarrack.isEmpty()) {
             Trooper trooper = troopersFromBarrack.poll();
             int timeToTrain = trooper.getTrainingTime();
-//            Thread.sleep(timeToTrain * 1000L);
+            Thread.sleep(timeToTrain * 1000L);
             armyCampService.addTrooperToCamp(trooper);
         }
     }

@@ -97,7 +97,7 @@ public class BarrackControllerTest {
         int actualCountOfTrooperInArmyCamp = armyCampService.getTrainedTroopers().size();
 
         // assert
-//        assertEquals(expectedTrainingTime,actualTrainingTime);
+        assertEquals(expectedTrainingTime,actualTrainingTime);
         assertEquals(expectedCountOfTrooperInArmyCamp,actualCountOfTrooperInArmyCamp);
     }
 }

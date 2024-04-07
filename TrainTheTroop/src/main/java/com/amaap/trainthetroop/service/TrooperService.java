@@ -10,6 +10,7 @@ import com.amaap.trainthetroop.service.model.TroopType;
 
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 
 public class TrooperService {
     private final InMemoryTrooperRepository inMemoryTrooperRepository;
@@ -38,5 +39,9 @@ public class TrooperService {
 
         return inMemoryTrooperRepository.insert(trooper);
 
+    }
+
+    public List<Trooper> getTroopers() {
+        return inMemoryTrooperRepository.getTroopers();
     }
 }

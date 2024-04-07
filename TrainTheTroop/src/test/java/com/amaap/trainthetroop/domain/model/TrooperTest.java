@@ -32,7 +32,8 @@ class TrooperTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        assertThrows(InvalidTrainingTimeException.class,()->new Trooper(trainingTime,trainingCost,weapon),"Invalid training time "+trainingTime );
+        InvalidTrainingTimeException exception = assertThrows(InvalidTrainingTimeException.class, () -> new Trooper(trainingTime, trainingCost, weapon), "Invalid training time " + trainingTime);
+        assertEquals("Invalid training time " + trainingTime,exception.getMessage());
     }
 
     @Test
@@ -43,7 +44,9 @@ class TrooperTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        assertThrows(InvalidTrainingCostException.class,()->new Trooper(trainingTime,trainingCost,weapon) ,"Invalid training cost "+trainingCost);
+        InvalidTrainingCostException exception = assertThrows(InvalidTrainingCostException.class, () -> new Trooper(trainingTime, trainingCost, weapon), "Invalid training cost " + trainingCost);
+        assertEquals("Invalid training cost " + trainingCost,exception.getMessage());
+        
     }
 
     @Test
@@ -54,6 +57,8 @@ class TrooperTest {
         Weapon weapon = null;
 
         // act & assert
-        assertThrows(InvalidWeaponException.class,()->new Trooper(trainingTime,trainingCost,weapon) ,"Invalid weapon name "+weapon);
+        InvalidWeaponException exception = assertThrows(InvalidWeaponException.class, () -> new Trooper(trainingTime, trainingCost, weapon), "Invalid weapon name " + weapon);
+        assertEquals("Invalid weapon name " + weapon,exception.getMessage());
+        
     }
 }

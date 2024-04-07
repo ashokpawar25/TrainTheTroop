@@ -6,6 +6,8 @@ import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
 import com.amaap.trainthetroop.repository.InMemoryTrooperRepository;
 import com.amaap.trainthetroop.service.model.TroopType;
 
+import java.util.List;
+
 public class TrooperRepository implements InMemoryTrooperRepository {
     private final InMemoryDatabase inMemoryDatabase;
 
@@ -16,5 +18,10 @@ public class TrooperRepository implements InMemoryTrooperRepository {
     @Override
     public Trooper insert(Trooper trooper) throws Exception {
         return inMemoryDatabase.insertIntoTrooperTable(trooper);
+    }
+
+    @Override
+    public List<Trooper> getTroopers() {
+        return inMemoryDatabase.getTroopers();
     }
 }

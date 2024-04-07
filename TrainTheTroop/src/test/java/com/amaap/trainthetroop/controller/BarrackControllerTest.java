@@ -4,6 +4,7 @@ import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
 import com.amaap.trainthetroop.repository.Impl.BarrackRepository;
 import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
 import com.amaap.trainthetroop.repository.Impl.db.FakeInMemoryDatabase;
@@ -34,6 +35,31 @@ public class BarrackControllerTest {
         trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
         trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         Response expected = new Response(HttpStatus.OK, "Trooper added into barrack");
+
+        // act
+        List<Trooper> troopers = trooperService.getTroopers();
+        Response actual = barrackController.addTrooperToBarrack(troopers);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleReturnBadRequestResponseWhenNumberOfTroopersToAddIntoBarrackIsMoreThanBarrackSize() throws Exception, InvalidTrooperTypeException {
+        // arrange
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        Response expected = new Response(HttpStatus.BADREQUEST, "Barrack is full...!\nTry after some time");
 
         // act
         List<Trooper> troopers = trooperService.getTroopers();

@@ -21,8 +21,7 @@ public class BarrackController {
 
     public Response addTrooperToBarrack(List<Trooper> troopers) {
         try{
-            List<Trooper> trooperList = trooperService.getTroopers();
-            barrackService.addTroopers(trooperList);
+            barrackService.addTroopers(troopers);
             return new Response(HttpStatus.OK,"Trooper added into barrack");
         }
         catch (BarrackFullException exception)

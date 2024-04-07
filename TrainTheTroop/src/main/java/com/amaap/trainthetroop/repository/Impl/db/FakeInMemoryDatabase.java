@@ -1,8 +1,6 @@
 package com.amaap.trainthetroop.repository.Impl.db;
 
-import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.domain.model.Weapon;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,8 +10,9 @@ import java.util.Queue;
 public class FakeInMemoryDatabase implements InMemoryDatabase {
     List<Trooper> trooperList = new ArrayList<>();
     Queue<Trooper> trooperInBarrack = new LinkedList<>();
+
     @Override
-    public Trooper insertIntoTrooperTable(Trooper trooper){
+    public Trooper insertIntoTrooperTable(Trooper trooper) {
         trooperList.add(trooper);
         return trooper;
     }

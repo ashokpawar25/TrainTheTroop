@@ -2,8 +2,7 @@ package com.amaap.trainthetroop.controller.dto;
 
 import java.util.Objects;
 
-public class Response
-{
+public class Response {
     public HttpStatus status;
     public String message;
 

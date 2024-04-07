@@ -4,7 +4,7 @@ import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataExceptio
 
 public class Archer extends Trooper {
     public Archer(int trainingTime, int trainingCost, Weapon weapon) throws InvalidTrooperDataException {
-        super(trainingTime,trainingCost,weapon);
+        super(trainingTime, trainingCost, weapon);
     }
 
 }

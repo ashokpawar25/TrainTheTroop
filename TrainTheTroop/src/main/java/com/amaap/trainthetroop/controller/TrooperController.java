@@ -1,4 +1,5 @@
 package com.amaap.trainthetroop.controller;
+
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
@@ -7,9 +8,9 @@ import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 
-public class TrooperController
-{
+public class TrooperController {
     private final TrooperService trooperService;
+
     public TrooperController(TrooperService trooperService) {
         this.trooperService = trooperService;
     }

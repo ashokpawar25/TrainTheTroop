@@ -6,7 +6,6 @@ import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
-import com.amaap.trainthetroop.service.model.TroopType;
 import org.junit.jupiter.api.Test;
 
 import java.util.Queue;
@@ -24,7 +23,7 @@ class FakeInMemoryDatabaseTest {
         int trainingTime = 6;
         int trainingCost = 20;
         Weapon weapon = Weapon.BOW_AND_ARROW;
-        Trooper trooper = new Archer(trainingTime,trainingCost,weapon);
+        Trooper trooper = new Archer(trainingTime, trainingCost, weapon);
 
         // act
         Trooper actual = fakeInMemoryDatabase.insertIntoTrooperTable(trooper);
@@ -40,7 +39,7 @@ class FakeInMemoryDatabaseTest {
         int trainingTime = 3;
         int trainingCost = 10;
         Weapon weapon = Weapon.SWORD;
-        Trooper trooper = new Barbarian(trainingTime,trainingCost,weapon);
+        Trooper trooper = new Barbarian(trainingTime, trainingCost, weapon);
 
         // act
         Trooper actual = fakeInMemoryDatabase.insertIntoTrooperTable(trooper);
@@ -71,6 +70,6 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertEquals(5, archerCount);
         assertEquals(5, barbarianCount);
-        assertEquals(10,troopersInBarrack.size());
+        assertEquals(10, troopersInBarrack.size());
     }
 }

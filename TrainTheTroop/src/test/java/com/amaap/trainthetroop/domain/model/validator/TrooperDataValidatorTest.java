@@ -3,13 +3,13 @@ package com.amaap.trainthetroop.domain.model.validator;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrooperDataValidatorTest {
 
     @Test
-    void shouldBeAbleToReturnFalseWhenTrainingTimeIsGreaterThanZero()
-    {
+    void shouldBeAbleToReturnFalseWhenTrainingTimeIsGreaterThanZero() {
         // arrange
         int trainingTime = 3;
 
@@ -21,8 +21,7 @@ class TrooperDataValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnTrueWhenTrainingTimeIsLessThanOrEqualToZero()
-    {
+    void shouldBeAbleToReturnTrueWhenTrainingTimeIsLessThanOrEqualToZero() {
         // arrange
         int trainingTime = -4;
 
@@ -34,8 +33,7 @@ class TrooperDataValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnFalseWhenTrainingCostIsGreaterThanZero()
-    {
+    void shouldBeAbleToReturnFalseWhenTrainingCostIsGreaterThanZero() {
         // arrange
         int trainingCost = 3;
 
@@ -47,8 +45,7 @@ class TrooperDataValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnTrueWhenTrainingCostIsLessThanOrEqualToZero()
-    {
+    void shouldBeAbleToReturnTrueWhenTrainingCostIsLessThanOrEqualToZero() {
         // arrange
         int trainingCost = -4;
 
@@ -60,8 +57,7 @@ class TrooperDataValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnFalseWhenWeaponIsValid()
-    {
+    void shouldBeAbleToReturnFalseWhenWeaponIsValid() {
         // arrange
         Weapon weapon = Weapon.SWORD;
 
@@ -73,8 +69,7 @@ class TrooperDataValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnTrueWhenWhenWeaponIsNull()
-    {
+    void shouldBeAbleToReturnTrueWhenWhenWeaponIsNull() {
         // arrange
         Weapon weapon = null;
 

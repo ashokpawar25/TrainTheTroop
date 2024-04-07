@@ -1,7 +1,5 @@
 package com.amaap.trainthetroop.service;
 
-import com.amaap.trainthetroop.controller.dto.HttpStatus;
-import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
@@ -62,7 +60,7 @@ class TrooperServiceTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        assertThrows(InvalidTrooperTypeException.class,()-> trooperService.create(null,trainingTime,trainingCost,weapon));
+        assertThrows(InvalidTrooperTypeException.class, () -> trooperService.create(null, trainingTime, trainingCost, weapon));
     }
 
     @Test
@@ -73,8 +71,8 @@ class TrooperServiceTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        InvalidTrainingTimeException exception = assertThrows(InvalidTrainingTimeException.class, () -> trooperService.create(TroopType.ARCHER,trainingTime, trainingCost, weapon), "Invalid training time " + trainingTime);
-        assertEquals("Invalid training time " + trainingTime,exception.getMessage());
+        InvalidTrainingTimeException exception = assertThrows(InvalidTrainingTimeException.class, () -> trooperService.create(TroopType.ARCHER, trainingTime, trainingCost, weapon), "Invalid training time " + trainingTime);
+        assertEquals("Invalid training time " + trainingTime, exception.getMessage());
     }
 
     @Test
@@ -85,8 +83,8 @@ class TrooperServiceTest {
         Weapon weapon = Weapon.SWORD;
 
         // act & assert
-        InvalidTrainingCostException exception = assertThrows(InvalidTrainingCostException.class, () -> trooperService.create(TroopType.BARBARIAN,trainingTime, trainingCost, weapon), "Invalid training cost " + trainingCost);
-        assertEquals("Invalid training cost " + trainingCost,exception.getMessage());
+        InvalidTrainingCostException exception = assertThrows(InvalidTrainingCostException.class, () -> trooperService.create(TroopType.BARBARIAN, trainingTime, trainingCost, weapon), "Invalid training cost " + trainingCost);
+        assertEquals("Invalid training cost " + trainingCost, exception.getMessage());
 
     }
 
@@ -98,8 +96,8 @@ class TrooperServiceTest {
         Weapon weapon = null;
 
         // act & assert
-        InvalidWeaponException exception = assertThrows(InvalidWeaponException.class, () -> trooperService.create(TroopType.BARBARIAN,trainingTime, trainingCost, weapon), "Invalid weapon name " + weapon);
-        assertEquals("Invalid weapon name " + weapon,exception.getMessage());
+        InvalidWeaponException exception = assertThrows(InvalidWeaponException.class, () -> trooperService.create(TroopType.BARBARIAN, trainingTime, trainingCost, weapon), "Invalid weapon name " + weapon);
+        assertEquals("Invalid weapon name " + weapon, exception.getMessage());
 
     }
 }

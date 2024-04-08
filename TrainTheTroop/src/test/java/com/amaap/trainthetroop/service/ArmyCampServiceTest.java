@@ -59,4 +59,20 @@ class ArmyCampServiceTest {
         assertEquals(expectedBarbarianCount,actualBarbarianCount);
 
     }
+
+    @Test
+    void shouldBeAbleToGetTrainedTroopersFromArmyCamp() throws InvalidTrooperDataException {
+        // arrange
+        Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper2 = new Barbarian(3, 10, Weapon.SWORD);
+        List<Trooper> expectedTrainedTroopers = List.of(trooper1,trooper2);
+
+        // act
+        armyCampService.addTrooperToCamp(trooper1);
+        armyCampService.addTrooperToCamp(trooper2);
+        List<Trooper> actualTrainedTroopers = armyCampService.getTrainedTroopers();
+
+        // assert
+        assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+    }
 }

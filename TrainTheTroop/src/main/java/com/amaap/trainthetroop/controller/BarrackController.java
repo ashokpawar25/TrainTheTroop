@@ -32,7 +32,15 @@ public class BarrackController {
         return barrackService.getTroopersFromBarrack();
     }
 
-    public void trainTheTrooper() throws InterruptedException {
-        barrackService.trainTheTrooper();
+    public Response trainTheTrooper() {
+        try {
+            barrackService.trainTheTrooper();
+            return new Response(HttpStatus.OK,"Trooper trained successfully");
+        }
+        catch (InterruptedException exception)
+        {
+            return new Response(HttpStatus.BADREQUEST,"Interrupt occurred while training the troopers");
+        }
+
     }
 }

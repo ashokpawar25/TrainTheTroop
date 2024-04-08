@@ -1,5 +1,7 @@
 package com.amaap.trainthetroop.controller;
 
+import com.amaap.trainthetroop.controller.dto.HttpStatus;
+import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
@@ -21,14 +23,12 @@ public class ArmyCampControllerTest {
             new InMemoryArmyCampRepository(new FakeInMemoryDatabase())));
 
     @Test
-    void shouldBeAbleToAddTrooperInArmyCamp() throws InvalidTrooperDataException {
+    void shouldBeAbleToReturnOkResponseWhenTrooperAddedIntoArmyCamp() throws InvalidTrooperDataException {
         // arrange
-        Trooper expected = new Archer(6, 20, Weapon.BOW_AND_ARROW);
-
+        Trooper trooper = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        Response expected = new Response(HttpStatus.OK,"Trooper added to camp");
         // act
-        armyCampController.addTrooperToCamp(expected);
-        List<Trooper> trainedTroopers = armyCampController.getTrainedTroopers();
-        Trooper actual = trainedTroopers.get(0);
+        Response actual = armyCampController.addTrooperToCamp(trooper);
 
         // assert
         assertEquals(expected, actual);
@@ -57,5 +57,22 @@ public class ArmyCampControllerTest {
         assertEquals(expectedBarbarianCount, actualBarbarianCount);
 
     }
+
+    @Test
+    void shouldBeAbleToGetTrainedTroopersFromArmyCamp() throws InvalidTrooperDataException {
+        // arrange
+        Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper2 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        List<Trooper> expectedTrainedTroopers = List.of(trooper1,trooper2);
+
+        // act
+        armyCampController.addTrooperToCamp(trooper1);
+        armyCampController.addTrooperToCamp(trooper2);
+        List<Trooper> actualTrainedTroopers = armyCampController.getTrainedTroopers();
+
+        // assert
+        assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+    }
+
 
 }

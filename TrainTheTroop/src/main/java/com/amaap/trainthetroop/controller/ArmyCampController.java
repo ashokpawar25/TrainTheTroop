@@ -1,5 +1,7 @@
 package com.amaap.trainthetroop.controller;
 
+import com.amaap.trainthetroop.controller.dto.HttpStatus;
+import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.service.model.TroopType;
@@ -17,8 +19,9 @@ public class ArmyCampController {
         return armyCampService.getTrainedTroopers();
     }
 
-    public void addTrooperToCamp(Trooper trooper) {
+    public Response addTrooperToCamp(Trooper trooper) {
         armyCampService.addTrooperToCamp(trooper);
+        return new Response(HttpStatus.OK,"Trooper added to camp");
     }
 
     public long getTrooperCount(TroopType troopType) {

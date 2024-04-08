@@ -8,6 +8,8 @@ import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 
+import java.util.List;
+
 public class TrooperController {
     private final TrooperService trooperService;
 
@@ -22,5 +24,10 @@ public class TrooperController {
         } catch (InvalidTrooperTypeException e) {
             return new Response(HttpStatus.BADREQUEST, "Invalid trooper type: " + type);
         }
+    }
+
+    public List<Trooper> getTroopers()
+    {
+        return trooperService.getTroopers();
     }
 }

@@ -7,6 +7,7 @@ import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TrooperFactory {
@@ -26,4 +27,9 @@ public class TrooperFactory {
         return trooperQueue;
     }
 
+    public static List<Trooper> getTrooperList() throws InvalidTrooperDataException {
+        Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper2 = new Barbarian(3, 10, Weapon.SWORD);
+        return List.of(trooper1,trooper2);
+    }
 }

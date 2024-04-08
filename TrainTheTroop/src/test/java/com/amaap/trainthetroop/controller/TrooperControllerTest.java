@@ -2,6 +2,7 @@ package com.amaap.trainthetroop.controller;
 
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
+import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
@@ -10,6 +11,9 @@ import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static com.amaap.trainthetroop.domain.model.factory.TrooperFactory.getTrooperList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TrooperControllerTest {
@@ -18,7 +22,7 @@ public class TrooperControllerTest {
             new TrooperRepository(new FakeInMemoryDatabase())));
 
     @Test
-    void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToReturnOkResponseWhenCreatesTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {
         // arrange
         int trainingTime = 6;
         int trainingCost = 20;
@@ -33,7 +37,7 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldBeAbleToCreateTrooperOfTypeBarbarian() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToReturnOkResponseWhenCreatesTrooperOfTypeBarbarian() throws Exception, InvalidTrooperTypeException {
         // arrange
         int trainingTime = 3;
         int trainingCost = 10;
@@ -48,7 +52,7 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldReturnBadRequestResponseWhenTrooperTypeIsInvalid()
+    void shouldReturnResponseAsBadRequestWhenTrooperTypeIsInvalid()
             throws Exception, InvalidTrooperTypeException {
         // arrange
         int trainingTime = 3;
@@ -58,6 +62,20 @@ public class TrooperControllerTest {
 
         // act
         Response actual = trooperController.create(null, trainingTime, trainingCost, weapon);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetTroopers() throws Exception, InvalidTrooperTypeException {
+        // arrange
+        trooperController.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        trooperController.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        List<Trooper>  expected = getTrooperList();
+
+        // act
+        List<Trooper> actual = trooperController.getTroopers();
 
         // assert
         assertEquals(expected, actual);

@@ -12,6 +12,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     List<Trooper> trooperList = new ArrayList<>();
     Queue<Trooper> trooperInBarrack = new LinkedList<>();
     List<Trooper> trainedTroopers = new ArrayList<>();
+    int trooperI;
 
     @Override
     public Trooper insertIntoTrooperTable(Trooper trooper) {

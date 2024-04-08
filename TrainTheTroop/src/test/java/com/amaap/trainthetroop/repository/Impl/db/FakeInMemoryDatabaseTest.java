@@ -7,6 +7,7 @@ import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
+import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -103,5 +104,23 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+    }
+
+    @Test
+    void getTroopersWithCount() throws InvalidTrooperDataException, InsufficientTrooperCountException {
+        // arrange
+        for(int i = 0;i<5;i++)
+        {
+            fakeInMemoryDatabase.insertIntoTrooperTable(new Barbarian(3, 10, Weapon.SWORD));
+            fakeInMemoryDatabase.insertIntoTrooperTable(new Archer(6, 20, Weapon.BOW_AND_ARROW));
+        }
+
+        // act
+        List<Trooper> troopers = fakeInMemoryDatabase.getTroopersWithCount(5,5);
+        List<Trooper> listOfTroopersInDatabase = fakeInMemoryDatabase.getTroopers();
+
+        // assert
+        assertEquals(10,troopers.size());
+        assertEquals(0 ,listOfTroopersInDatabase.size());
     }
 }

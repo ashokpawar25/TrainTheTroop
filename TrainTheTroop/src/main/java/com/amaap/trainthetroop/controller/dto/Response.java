@@ -18,9 +18,4 @@ public class Response {
         Response response = (Response) o;
         return status == response.status && Objects.equals(message, response.message);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(status, message);
-    }
 }

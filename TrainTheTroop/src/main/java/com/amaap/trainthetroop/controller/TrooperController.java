@@ -4,6 +4,7 @@ import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
@@ -29,5 +30,9 @@ public class TrooperController {
     public List<Trooper> getTroopers()
     {
         return trooperService.getTroopers();
+    }
+
+    public List<Trooper> getTroopersWithCount(int archerCount,int barbarianCount) throws InsufficientTrooperCountException {
+        return trooperService.getTroopersWithCount(archerCount,barbarianCount);
     }
 }

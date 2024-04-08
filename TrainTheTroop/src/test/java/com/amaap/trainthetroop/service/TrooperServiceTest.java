@@ -13,6 +13,8 @@ import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrooperServiceTest {
@@ -96,4 +98,23 @@ class TrooperServiceTest {
         assertEquals("Invalid weapon name " + weapon, exception.getMessage());
 
     }
+
+    @Test
+    void getTroopersWithCount() throws Exception, InvalidTrooperTypeException {
+        // arrange
+        for(int i = 0;i<5;i++)
+        {
+            trooperService.create(TroopType.BARBARIAN,3,10,Weapon.SWORD);
+            trooperService.create(TroopType.ARCHER,6,20,Weapon.BOW_AND_ARROW);
+        }
+
+        // act
+        List<Trooper> troopers = trooperService.getTroopersWithCount(5,5);
+        List<Trooper> listOfTroopersInDatabase = trooperService.getTroopers();
+
+        // assert
+        assertEquals(10,troopers.size());
+        assertEquals(0 ,listOfTroopersInDatabase.size());
+    }
+
 }

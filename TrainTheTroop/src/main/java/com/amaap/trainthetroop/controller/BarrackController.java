@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.controller;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.BarrackFullException;
@@ -19,12 +20,14 @@ public class BarrackController {
         this.barrackService = barrackService;
     }
 
-    public Response addTrooperToBarrack(List<Trooper> troopers) {
+    public Response addTrooperToBarrack(int archerCount,int barbarianCont) {
         try {
-            barrackService.addTroopers(troopers);
+            barrackService.addTroopers(archerCount,barbarianCont);
             return new Response(HttpStatus.OK, "Trooper added into barrack");
         } catch (BarrackFullException exception) {
             return new Response(HttpStatus.BADREQUEST, exception.getMessage());
+        } catch (InsufficientTrooperCountException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -88,4 +88,20 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetTrainedTroopersFromArmyCamp() throws InvalidTrooperDataException {
+        // arrange
+        Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper2 = new Barbarian(3, 10, Weapon.SWORD);
+        List<Trooper> expectedTrainedTroopers = List.of(trooper1,trooper2);
+
+        // act
+        fakeInMemoryDatabase.insertIntoArmyCampTable(trooper1);
+        fakeInMemoryDatabase.insertIntoArmyCampTable(trooper2);
+        List<Trooper> actualTrainedTroopers = fakeInMemoryDatabase.getTroopersFromArmyCamp();
+
+        // assert
+        assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+    }
 }

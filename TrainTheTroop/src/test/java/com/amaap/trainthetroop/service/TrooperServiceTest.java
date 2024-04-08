@@ -7,7 +7,7 @@ import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingCostException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingTimeException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidWeaponException;
-import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryTrooperRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrooperServiceTest {
-    TrooperService trooperService = new TrooperService(new TrooperRepository(new FakeInMemoryDatabase()));
+    TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {

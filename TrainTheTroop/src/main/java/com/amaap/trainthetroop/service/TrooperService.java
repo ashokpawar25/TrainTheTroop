@@ -4,7 +4,7 @@ import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
-import com.amaap.trainthetroop.repository.InMemoryTrooperRepository;
+import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.service.model.TroopType;
 
@@ -12,10 +12,10 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class TrooperService {
-    private final InMemoryTrooperRepository inMemoryTrooperRepository;
+    private final TrooperRepository trooperRepository;
 
-    public TrooperService(InMemoryTrooperRepository trooperInMemoryRepository) {
-        this.inMemoryTrooperRepository = trooperInMemoryRepository;
+    public TrooperService(TrooperRepository trooperInMemoryRepository) {
+        this.trooperRepository = trooperInMemoryRepository;
     }
 
     public Trooper create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) throws Exception, InvalidTrooperTypeException {
@@ -30,11 +30,11 @@ public class TrooperService {
             throw new InvalidTrooperTypeException("Invalid trooper type" + type);
         }
 
-        return inMemoryTrooperRepository.insert(trooper);
+        return trooperRepository.insert(trooper);
 
     }
 
     public List<Trooper> getTroopers() {
-        return inMemoryTrooperRepository.getTroopers();
+        return trooperRepository.getTroopers();
     }
 }

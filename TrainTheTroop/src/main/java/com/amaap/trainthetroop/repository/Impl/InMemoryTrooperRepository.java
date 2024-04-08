@@ -2,14 +2,13 @@ package com.amaap.trainthetroop.repository.Impl;
 
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryTrooperRepository;
 
 import java.util.List;
 
-public class TrooperRepository implements InMemoryTrooperRepository {
+public class InMemoryTrooperRepository implements com.amaap.trainthetroop.repository.TrooperRepository {
     private final InMemoryDatabase inMemoryDatabase;
 
-    public TrooperRepository(InMemoryDatabase inMemoryDatabase) {
+    public InMemoryTrooperRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }
 

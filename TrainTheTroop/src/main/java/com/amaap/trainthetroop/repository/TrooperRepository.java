@@ -4,7 +4,7 @@ import com.amaap.trainthetroop.domain.model.Trooper;
 
 import java.util.List;
 
-public interface InMemoryTrooperRepository {
+public interface TrooperRepository {
     Trooper insert(Trooper trooper) throws Exception;
 
     List<Trooper> getTroopers();

@@ -4,7 +4,7 @@ import com.amaap.trainthetroop.domain.model.Trooper;
 
 import java.util.List;
 
-public interface InMemoryArmyCampRepository {
+public interface ArmyCampRepository {
     void add(Trooper trooper);
 
     List<Trooper> getTrainedTroopers();

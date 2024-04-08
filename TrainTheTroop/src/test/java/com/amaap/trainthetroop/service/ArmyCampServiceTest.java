@@ -5,10 +5,10 @@ import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
-import com.amaap.trainthetroop.repository.Impl.ArmyCampRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryArmyCampRepository;
+import com.amaap.trainthetroop.repository.ArmyCampRepository;
 import com.amaap.trainthetroop.service.model.TroopType;
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ArmyCampServiceTest {
     InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    InMemoryArmyCampRepository inMemoryArmyCampRepository = new ArmyCampRepository(inMemoryDatabase);
-    ArmyCampService armyCampService = new ArmyCampService(inMemoryArmyCampRepository);
+    ArmyCampRepository armyCampRepository = new InMemoryArmyCampRepository(inMemoryDatabase);
+    ArmyCampService armyCampService = new ArmyCampService(armyCampRepository);
 
     @Test
     void shouldBeAbleToAddTrooperInArmyCamp() throws InvalidTrooperDataException {

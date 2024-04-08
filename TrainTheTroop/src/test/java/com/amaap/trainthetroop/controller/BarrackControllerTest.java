@@ -4,11 +4,11 @@ import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
-import com.amaap.trainthetroop.repository.Impl.ArmyCampRepository;
-import com.amaap.trainthetroop.repository.Impl.BarrackRepository;
-import com.amaap.trainthetroop.repository.Impl.TrooperRepository;
+import com.amaap.trainthetroop.repository.BarrackRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryBarrackRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryTrooperRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
 import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
@@ -24,10 +24,10 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BarrackControllerTest {
-    TrooperService trooperService = new TrooperService(new TrooperRepository(new FakeInMemoryDatabase()));
-    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(new FakeInMemoryDatabase());
-    ArmyCampService armyCampService = new ArmyCampService(new ArmyCampRepository(new FakeInMemoryDatabase()));
-    BarrackService barrackService = new BarrackService(inMemoryBarrackRepository,armyCampService);
+    TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
+    BarrackRepository barrackRepository = new InMemoryBarrackRepository(new FakeInMemoryDatabase());
+    ArmyCampService armyCampService = new ArmyCampService(new InMemoryArmyCampRepository(new FakeInMemoryDatabase()));
+    BarrackService barrackService = new BarrackService(barrackRepository,armyCampService);
     BarrackController barrackController = new BarrackController(trooperService, barrackService);
 
     @Test

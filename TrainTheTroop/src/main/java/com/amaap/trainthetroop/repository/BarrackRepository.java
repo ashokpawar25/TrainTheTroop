@@ -4,7 +4,7 @@ import com.amaap.trainthetroop.domain.model.Trooper;
 
 import java.util.Queue;
 
-public interface InMemoryBarrackRepository {
+public interface BarrackRepository {
     void addTroopers(Queue<Trooper> trooperList);
 
     Queue<Trooper> getTroopersFromBarrack();

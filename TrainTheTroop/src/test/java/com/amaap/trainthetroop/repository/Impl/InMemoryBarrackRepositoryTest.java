@@ -5,16 +5,16 @@ import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
+import com.amaap.trainthetroop.repository.BarrackRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class BarrackRepositoryTest {
-    InMemoryBarrackRepository inMemoryBarrackRepository = new BarrackRepository(new FakeInMemoryDatabase());
+class InMemoryBarrackRepositoryTest {
+    BarrackRepository barrackRepository = new InMemoryBarrackRepository(new FakeInMemoryDatabase());
 
     @Test
     void shouldBeAbleToAddTrooperIntoBarrack() throws InvalidTrooperDataException {
@@ -24,8 +24,8 @@ class BarrackRepositoryTest {
         int barbarianCount = 0;
 
         // act
-        inMemoryBarrackRepository.addTroopers(trooperQueue);
-        Queue<Trooper> troopersInBarrack = inMemoryBarrackRepository.getTroopersFromBarrack();
+        barrackRepository.addTroopers(trooperQueue);
+        Queue<Trooper> troopersInBarrack = barrackRepository.getTroopersFromBarrack();
         for (Trooper trooper : troopersInBarrack) {
             if (trooper instanceof Archer) {
                 archerCount++;

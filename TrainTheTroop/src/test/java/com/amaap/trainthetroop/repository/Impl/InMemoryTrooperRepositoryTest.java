@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class TrooperRepositoryTest {
-    TrooperRepository trooperRepository = new TrooperRepository(new FakeInMemoryDatabase());
+class InMemoryTrooperRepositoryTest {
+    InMemoryTrooperRepository inMemoryTrooperRepository = new InMemoryTrooperRepository(new FakeInMemoryDatabase());
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception {
@@ -21,7 +21,7 @@ class TrooperRepositoryTest {
         Trooper trooper = new Archer(trainingTime, trainingCost, weapon);
 
         // act
-        Trooper actual = trooperRepository.insert(trooper);
+        Trooper actual = inMemoryTrooperRepository.insert(trooper);
         boolean isArcher = actual instanceof Archer;
 
         // assert
@@ -37,7 +37,7 @@ class TrooperRepositoryTest {
         Trooper trooper = new Barbarian(trainingTime, trainingCost, weapon);
 
         // act
-        Trooper actual = trooperRepository.insert(trooper);
+        Trooper actual = inMemoryTrooperRepository.insert(trooper);
         boolean isArcher = actual instanceof Barbarian;
 
         // assert

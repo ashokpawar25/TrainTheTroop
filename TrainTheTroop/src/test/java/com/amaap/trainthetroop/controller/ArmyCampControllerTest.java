@@ -5,7 +5,7 @@ import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
-import com.amaap.trainthetroop.repository.Impl.ArmyCampRepository;
+import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.service.model.TroopType;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ArmyCampControllerTest {
 
     ArmyCampController armyCampController = new ArmyCampController(new ArmyCampService(
-            new ArmyCampRepository(new FakeInMemoryDatabase())));
+            new InMemoryArmyCampRepository(new FakeInMemoryDatabase())));
 
     @Test
     void shouldBeAbleToAddTrooperInArmyCamp() throws InvalidTrooperDataException {

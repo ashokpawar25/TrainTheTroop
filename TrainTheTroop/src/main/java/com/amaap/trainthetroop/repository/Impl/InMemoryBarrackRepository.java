@@ -2,14 +2,13 @@ package com.amaap.trainthetroop.repository.Impl;
 
 import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
-import com.amaap.trainthetroop.repository.InMemoryBarrackRepository;
 
 import java.util.Queue;
 
-public class BarrackRepository implements InMemoryBarrackRepository {
+public class InMemoryBarrackRepository implements com.amaap.trainthetroop.repository.BarrackRepository {
     InMemoryDatabase inMemoryDatabase;
 
-    public BarrackRepository(InMemoryDatabase inMemoryDatabase) {
+    public InMemoryBarrackRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }
 

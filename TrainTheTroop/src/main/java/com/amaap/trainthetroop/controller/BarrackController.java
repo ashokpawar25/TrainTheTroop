@@ -6,9 +6,7 @@ import com.amaap.trainthetroop.domain.model.Trooper;
 import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
-import com.amaap.trainthetroop.service.exception.BarrackFullException;
 
-import java.util.List;
 import java.util.Queue;
 
 public class BarrackController {
@@ -24,8 +22,6 @@ public class BarrackController {
         try {
             barrackService.addTroopers(archerCount,barbarianCont);
             return new Response(HttpStatus.OK, "Trooper added into barrack");
-        } catch (BarrackFullException exception) {
-            return new Response(HttpStatus.BADREQUEST, exception.getMessage());
         } catch (InsufficientTrooperCountException e) {
             throw new RuntimeException(e);
         }

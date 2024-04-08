@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Queue;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FakeInMemoryDatabaseTest {
 
@@ -107,7 +106,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void getTroopersWithCount() throws InvalidTrooperDataException, InsufficientTrooperCountException {
+    void shouldBeAbleToGetTroopersWithCount() throws InvalidTrooperDataException, InsufficientTrooperCountException {
         // arrange
         for(int i = 0;i<5;i++)
         {
@@ -122,5 +121,22 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertEquals(10,troopers.size());
         assertEquals(0 ,listOfTroopersInDatabase.size());
+    }
+
+    @Test
+    void shouldThrowInsufficientTrooperCountExceptionWhenTroopersAreNotAvailable() throws InvalidTrooperDataException, InsufficientTrooperCountException {
+        // arrange
+        for(int i = 0;i<5;i++)
+        {
+            fakeInMemoryDatabase.insertIntoTrooperTable(new Barbarian(3, 10, Weapon.SWORD));
+            fakeInMemoryDatabase.insertIntoTrooperTable(new Archer(6, 20, Weapon.BOW_AND_ARROW));
+        }
+
+        // act & assert
+        assertThrows(InsufficientTrooperCountException.class,()->fakeInMemoryDatabase.getTroopersWithCount(6,9));
+        assertThrows(InsufficientTrooperCountException.class,()->fakeInMemoryDatabase.getTroopersWithCount(4,6));
+        assertThrows(InsufficientTrooperCountException.class,()->fakeInMemoryDatabase.getTroopersWithCount(6,4));
+        assertThrows(InsufficientTrooperCountException.class,()->fakeInMemoryDatabase.getTroopersWithCount(6,4));
+
     }
 }

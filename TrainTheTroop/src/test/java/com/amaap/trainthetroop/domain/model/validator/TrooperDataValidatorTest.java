@@ -3,8 +3,7 @@ package com.amaap.trainthetroop.domain.model.validator;
 import com.amaap.trainthetroop.domain.model.Weapon;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TrooperDataValidatorTest {
 
@@ -78,6 +77,16 @@ class TrooperDataValidatorTest {
 
         // assert
         assertTrue(isValidTime);
+    }
+
+    @Test
+    void shouldBeAbleToCreateInstanceOfClass()
+    {
+        // arrange & act
+        TrooperDataValidator trooperDataValidator = new TrooperDataValidator();
+
+        // assert
+        assertNotNull(trooperDataValidator);
     }
 
 }

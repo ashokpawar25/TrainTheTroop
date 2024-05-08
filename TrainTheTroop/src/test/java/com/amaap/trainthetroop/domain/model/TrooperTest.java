@@ -4,6 +4,7 @@ import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingCostExcepti
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingTimeException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidWeaponException;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

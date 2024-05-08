@@ -1,7 +1,7 @@
 package com.amaap.trainthetroop.service;
 
 import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.InMemoryBarrackRepository;
 import com.amaap.trainthetroop.repository.Impl.InMemoryTrooperRepository;

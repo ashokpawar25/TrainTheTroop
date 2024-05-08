@@ -1,6 +1,6 @@
 package com.amaap.trainthetroop.domain.model.validator;
 
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 
 import java.util.EnumSet;
 

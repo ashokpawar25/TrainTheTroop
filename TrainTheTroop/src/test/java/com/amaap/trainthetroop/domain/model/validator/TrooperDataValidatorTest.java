@@ -1,6 +1,6 @@
 package com.amaap.trainthetroop.domain.model.validator;
 
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

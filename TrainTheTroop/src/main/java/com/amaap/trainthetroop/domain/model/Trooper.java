@@ -5,8 +5,7 @@ import com.amaap.trainthetroop.domain.model.exception.InvalidTrainingTimeExcepti
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.exception.InvalidWeaponException;
 import com.amaap.trainthetroop.domain.model.validator.TrooperDataValidator;
-
-import java.util.Objects;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 
 public class Trooper {
     private final int trainingTime;

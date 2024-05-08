@@ -3,7 +3,7 @@ package com.amaap.trainthetroop.domain.model.factory;
 import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 
 import java.util.LinkedList;

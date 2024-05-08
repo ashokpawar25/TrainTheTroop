@@ -3,7 +3,7 @@ package com.amaap.trainthetroop.service;
 import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;

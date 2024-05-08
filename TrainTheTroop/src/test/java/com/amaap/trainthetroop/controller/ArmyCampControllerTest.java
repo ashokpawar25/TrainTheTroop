@@ -5,7 +5,7 @@ import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.Archer;
 import com.amaap.trainthetroop.domain.model.Barbarian;
 import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.domain.model.Weapon;
+import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;

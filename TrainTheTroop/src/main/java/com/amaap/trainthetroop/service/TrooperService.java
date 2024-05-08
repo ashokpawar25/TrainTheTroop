@@ -1,13 +1,13 @@
 package com.amaap.trainthetroop.service;
 
-import com.amaap.trainthetroop.domain.model.Archer;
-import com.amaap.trainthetroop.domain.model.Barbarian;
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Archer;
+import com.amaap.trainthetroop.domain.model.entity.Barbarian;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
-import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
+import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
-import com.amaap.trainthetroop.service.model.TroopType;
+import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
 
 import java.util.EnumSet;
 import java.util.List;

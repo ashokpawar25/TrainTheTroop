@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.domain.model.validator;
 
+import com.amaap.trainthetroop.domain.model.entity.validator.TrooperDataValidator;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import org.junit.jupiter.api.Test;
 

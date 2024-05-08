@@ -1,7 +1,7 @@
 package com.amaap.trainthetroop.repository.Impl;
 
-import com.amaap.trainthetroop.domain.model.Trooper;
-import com.amaap.trainthetroop.repository.Impl.db.InMemoryDatabase;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.repository.db.InMemoryDatabase;
 
 import java.util.Queue;
 

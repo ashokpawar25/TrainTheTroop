@@ -1,8 +1,8 @@
 package com.amaap.trainthetroop.service;
 
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.BarrackRepository;
-import com.amaap.trainthetroop.repository.Impl.db.impl.exception.InsufficientTrooperCountException;
+import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 
 import java.util.LinkedList;
 import java.util.List;

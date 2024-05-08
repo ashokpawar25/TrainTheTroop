@@ -2,15 +2,15 @@ package com.amaap.trainthetroop.controller;
 
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
-import com.amaap.trainthetroop.domain.model.Archer;
-import com.amaap.trainthetroop.domain.model.Barbarian;
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Archer;
+import com.amaap.trainthetroop.domain.model.entity.Barbarian;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
-import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
-import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
+import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.ArmyCampService;
-import com.amaap.trainthetroop.service.model.TroopType;
+import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

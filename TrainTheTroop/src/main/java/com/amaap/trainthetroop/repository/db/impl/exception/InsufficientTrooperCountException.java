@@ -1,4 +1,4 @@
-package com.amaap.trainthetroop.repository.Impl.db.impl.exception;
+package com.amaap.trainthetroop.repository.db.impl.exception;
 
 public class InsufficientTrooperCountException extends Exception {
     public InsufficientTrooperCountException(String message) {

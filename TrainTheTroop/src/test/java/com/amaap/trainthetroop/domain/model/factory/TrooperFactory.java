@@ -1,10 +1,10 @@
 package com.amaap.trainthetroop.domain.model.factory;
 
-import com.amaap.trainthetroop.domain.model.Archer;
-import com.amaap.trainthetroop.domain.model.Barbarian;
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Archer;
+import com.amaap.trainthetroop.domain.model.entity.Barbarian;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
-import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 
 import java.util.LinkedList;
 import java.util.List;

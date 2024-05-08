@@ -1,6 +1,6 @@
 package com.amaap.trainthetroop.repository;
 
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 
 import java.util.Queue;
 

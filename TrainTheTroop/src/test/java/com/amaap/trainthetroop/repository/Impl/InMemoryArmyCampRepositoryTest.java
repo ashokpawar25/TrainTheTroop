@@ -1,11 +1,11 @@
 package com.amaap.trainthetroop.repository.Impl;
 
-import com.amaap.trainthetroop.domain.model.Archer;
-import com.amaap.trainthetroop.domain.model.Barbarian;
-import com.amaap.trainthetroop.domain.model.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.Archer;
+import com.amaap.trainthetroop.domain.model.entity.Barbarian;
+import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
-import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
-import com.amaap.trainthetroop.repository.Impl.db.impl.FakeInMemoryDatabase;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
+import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

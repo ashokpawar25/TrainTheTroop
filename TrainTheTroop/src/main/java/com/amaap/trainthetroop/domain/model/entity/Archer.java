@@ -1,6 +1,6 @@
-package com.amaap.trainthetroop.domain.model;
+package com.amaap.trainthetroop.domain.model.entity;
 
-import com.amaap.trainthetroop.domain.model.exception.InvalidTrooperDataException;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 
 public class Archer extends Trooper {

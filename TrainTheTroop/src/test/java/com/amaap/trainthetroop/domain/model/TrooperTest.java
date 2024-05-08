@@ -67,6 +67,7 @@ class TrooperTest {
 
         // arrange
         Trooper trooper1 = new Trooper(3, 10, Weapon.SWORD);
+<<<<<<< HEAD
         Trooper trooper2 = new Trooper(3, 10, Weapon.SWORD);
         Trooper trooper3 = new Trooper(6, 10, Weapon.SWORD);
         Trooper trooper4 = new Trooper(3, 20, Weapon.SWORD);
@@ -82,6 +83,25 @@ class TrooperTest {
         assertFalse(trooper1.equals(trooper5));
         assertFalse(trooper1.equals(trooper6));
         assertFalse(trooper1.equals(object));
+=======
+        Trooper trooper2 = new Trooper(3, 10, Weapon.BOW_AND_ARROW);
+        Trooper trooper3 = new Trooper(6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper4 = new Trooper(6, 20, Weapon.SWORD);
+        Trooper trooper5 = new Trooper(6, 20, Weapon.SWORD);
+        Trooper trooper6 = new Trooper(3, 20, Weapon.SWORD);
+
+        Object object = new Object();
+
+        // act & assert
+        assertFalse(trooper1.equals(trooper2));
+        assertFalse(trooper2.equals(trooper1));
+        assertFalse(trooper1.equals(trooper3));
+        assertFalse(trooper1.equals(trooper4));
+        assertFalse(trooper1.equals(object));
+        assertTrue(trooper1.equals(trooper1));
+        assertTrue(trooper4.equals(trooper5));
+        assertFalse(trooper5.equals(trooper6));
+>>>>>>> a8f69a0 (final commit)
         assertFalse(trooper1.equals(null));
     }
 }

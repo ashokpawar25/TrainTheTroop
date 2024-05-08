@@ -22,8 +22,6 @@ public class BarrackController {
         try {
             barrackService.addTroopers(archerCount,barbarianCont);
             return new Response(HttpStatus.OK, "Trooper added into barrack");
-        } catch (BarrackFullException exception) {
-            return new Response(HttpStatus.BADREQUEST, exception.getMessage());
         } catch (InsufficientTrooperCountException e) {
             throw new RuntimeException(e);
         }

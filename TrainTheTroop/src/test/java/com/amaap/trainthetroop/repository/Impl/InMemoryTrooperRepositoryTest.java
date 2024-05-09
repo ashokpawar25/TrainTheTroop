@@ -3,8 +3,10 @@ package com.amaap.trainthetroop.repository.Impl;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -48,7 +50,7 @@ class InMemoryTrooperRepositoryTest {
     }
 
     @Test
-    void getTroopersWithCount() throws Exception {
+    void shouldBeAbleToGetTroopersWithCount() throws InvalidTrooperDataException, InsufficientTrooperCountException {
         // arrange
         for(int i = 0;i<5;i++)
         {

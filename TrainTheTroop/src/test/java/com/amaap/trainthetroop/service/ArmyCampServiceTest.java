@@ -57,7 +57,6 @@ class ArmyCampServiceTest {
         // assert
         assertEquals(expectedArcherCount,actualArcherCount);
         assertEquals(expectedBarbarianCount,actualBarbarianCount);
-
     }
 
     @Test
@@ -65,14 +64,14 @@ class ArmyCampServiceTest {
         // arrange
         Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
         Trooper trooper2 = new Barbarian(3, 10, Weapon.SWORD);
-        List<Trooper> expectedTrainedTroopers = List.of(trooper1,trooper2);
+        List<Trooper> expected = List.of(trooper1,trooper2);
 
         // act
         armyCampService.addTrooperToCamp(trooper1);
         armyCampService.addTrooperToCamp(trooper2);
-        List<Trooper> actualTrainedTroopers = armyCampService.getTrainedTroopers();
+        List<Trooper> actual = armyCampService.getTrainedTroopers();
 
         // assert
-        assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+        assertEquals(expected, actual);
     }
 }

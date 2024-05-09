@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.service;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrainingCostException;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrainingTimeException;
@@ -21,30 +22,30 @@ class TrooperServiceTest {
     TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
 
     @Test
-    void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToCreateTrooperOfTypeArcher() throws InvalidTrooperTypeException, InvalidTrooperDataException {
         // arrange
         int trainingTime = 6;
         int trainingCost = 20;
         Weapon weapon = Weapon.BOW_AND_ARROW;
 
         // act
-        Trooper actual = trooperService.create(TroopType.ARCHER, trainingTime, trainingCost, weapon);
-        boolean isArcher = actual instanceof Archer;
+        Trooper trooper = trooperService.create(TroopType.ARCHER, trainingTime, trainingCost, weapon);
+        boolean isArcher = trooper instanceof Archer;
 
         // assert
         assertTrue(isArcher);
     }
 
     @Test
-    void shouldBeAbleToCreateTrooperOfTypeBarbarian() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToCreateTrooperOfTypeBarbarian() throws InvalidTrooperTypeException, InvalidTrooperDataException {
         // arrange
         int trainingTime = 3;
         int trainingCost = 10;
         Weapon weapon = Weapon.SWORD;
 
         // act
-        Trooper actual = trooperService.create(TroopType.BARBARIAN, trainingTime, trainingCost, weapon);
-        boolean isBarbarian = actual instanceof Barbarian;
+        Trooper trooper = trooperService.create(TroopType.BARBARIAN, trainingTime, trainingCost, weapon);
+        boolean isBarbarian = trooper instanceof Barbarian;
 
         // assert
         assertTrue(isBarbarian);
@@ -110,11 +111,11 @@ class TrooperServiceTest {
 
         // act
         List<Trooper> troopers = trooperService.getTroopersWithCount(5,5);
-        List<Trooper> listOfTroopersInDatabase = trooperService.getTroopers();
+        List<Trooper> remainingTroopersInDatabase = trooperService.getTroopers();
 
         // assert
         assertEquals(10,troopers.size());
-        assertEquals(0 ,listOfTroopersInDatabase.size());
+        assertEquals(0 ,remainingTroopersInDatabase.size());
     }
 
 }

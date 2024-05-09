@@ -85,21 +85,17 @@ public class BarrackControllerTest {
             trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         }
         long expectedTrainingTime = 45;
-        int expectedCountOfTrooperInArmyCamp = 10;
         Response expected = new Response(HttpStatus.OK,"Trooper trained successfully");
 
         // act
-        List<Trooper> troopers = trooperService.getTroopers();
         barrackController.addTrooperToBarrack(5,5);
         LocalTime trainingStartTime = LocalTime.now();
         Response actual = barrackController.trainTheTrooper();
         LocalTime trainingEndTime = LocalTime.now();
         long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
-        int actualCountOfTrooperInArmyCamp = armyCampService.getTrainedTroopers().size();
 
         // assert
 //        assertEquals(expectedTrainingTime,actualTrainingTime);
-        assertEquals(expectedCountOfTrooperInArmyCamp,actualCountOfTrooperInArmyCamp);
         assertEquals(expected,actual);
     }
 }

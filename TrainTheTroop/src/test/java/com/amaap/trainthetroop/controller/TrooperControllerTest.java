@@ -3,9 +3,11 @@ package com.amaap.trainthetroop.controller;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.Impl.InMemoryTrooperRepository;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
+import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
@@ -22,7 +24,7 @@ public class TrooperControllerTest {
             new InMemoryTrooperRepository(new FakeInMemoryDatabase())));
 
     @Test
-    void shouldBeAbleToReturnOkResponseWhenCreatesTrooperOfTypeArcher() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToGetOkResponseWhenCreatesTrooperOfTypeArcher() {
         // arrange
         int trainingTime = 6;
         int trainingCost = 20;
@@ -37,7 +39,7 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldBeAbleToReturnOkResponseWhenCreatesTrooperOfTypeBarbarian() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToGetOkResponseWhenCreatesTrooperOfTypeBarbarian() {
         // arrange
         int trainingTime = 3;
         int trainingCost = 10;
@@ -52,8 +54,7 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldReturnResponseAsBadRequestWhenTrooperTypeIsInvalid()
-            throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToGetBadRequestAsResponseWhenTrooperTypeIsInvalid() {
         // arrange
         int trainingTime = 3;
         int trainingCost = 10;
@@ -68,11 +69,11 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void shouldBeAbleToGetTroopers() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToGetTroopers() throws InvalidTrooperDataException {
         // arrange
         trooperController.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
         trooperController.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
-        List<Trooper>  expected = getTrooperList();
+        List<Trooper> expected = getTrooperList();
 
         // act
         List<Trooper> actual = trooperController.getTroopers();
@@ -82,7 +83,7 @@ public class TrooperControllerTest {
     }
 
     @Test
-    void getTroopersWithCount() throws Exception, InvalidTrooperTypeException {
+    void getTroopersWithCount() throws InsufficientTrooperCountException {
         // arrange
         for(int i = 0;i<5;i++)
         {

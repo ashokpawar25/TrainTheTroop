@@ -6,7 +6,7 @@ import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperC
 import java.util.List;
 
 public interface TrooperRepository {
-    Trooper insert(Trooper trooper) throws Exception;
+    Trooper insert(Trooper trooper) ;
 
     List<Trooper> getTroopers();
 

@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.controller;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.InMemoryBarrackRepository;
@@ -26,39 +27,38 @@ public class BarrackControllerTest {
     TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
     ArmyCampService armyCampService = new ArmyCampService(new InMemoryArmyCampRepository(new FakeInMemoryDatabase()));
     BarrackService barrackService = new BarrackService(new InMemoryBarrackRepository(new FakeInMemoryDatabase()),armyCampService,trooperService);
-    BarrackController barrackController = new BarrackController(trooperService, barrackService);
+    BarrackController barrackController = new BarrackController(barrackService);
 
     @Test
-    void shouldBeAbleReturnOkResponseWhenTrooperAddedSuccessfullyIntoBarrack() throws Exception, InvalidTrooperTypeException {
+    void shouldBeAbleToGetOkResponseWhenTrooperAddedSuccessfullyIntoBarrack() throws InvalidTrooperTypeException, InvalidTrooperDataException {
         // arrange
         trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
         trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         Response expected = new Response(HttpStatus.OK, "Trooper added into barrack");
 
         // act
-        List<Trooper> troopers = trooperService.getTroopers();
         Response actual = barrackController.addTrooperToBarrack(1,1);
 
         // assert
         assertEquals(expected, actual);
     }
 
-//    @Test
-//    void shouldBeAbleReturnBadRequestResponseWhenNumberOfTroopersToAddIntoBarrackIsMoreThanBarrackSize() throws Exception, InvalidTrooperTypeException {
-//        // arrange
-//        for (int i = 0; i < 6; i++) {
-//            trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
-//            trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
-//        }
-//        Response expected = new Response(HttpStatus.BADREQUEST, "Barrack is full...!\nTry after some time");
-//
-//        // act
-//        List<Trooper> troopers = trooperService.getTroopers();
-//        Response actual = barrackController.addTrooperToBarrack(5,5);
-//
-//        // assert
-//        assertEquals(expected, actual);
-//    }
+    @Test
+    void shouldBeAbleGetBadRequestResponseWhenNumberOfTroopersToAddIntoBarrackIsMoreThanBarrackSize() throws Exception, InvalidTrooperTypeException {
+        // arrange
+        for (int i = 0; i < 6; i++) {
+            trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+            trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        }
+        Response expected = new Response(HttpStatus.BADREQUEST, "Maximum ten troopers can be added into barrack at a time");
+
+        // act
+        List<Trooper> troopers = trooperService.getTroopers();
+        Response actual = barrackController.addTrooperToBarrack(6,6);
+
+        // assert
+        assertEquals(expected, actual);
+    }
 
     @Test
     void shouldBeAbleToGetTroopersFromBarrack() throws Exception, InvalidTrooperTypeException {

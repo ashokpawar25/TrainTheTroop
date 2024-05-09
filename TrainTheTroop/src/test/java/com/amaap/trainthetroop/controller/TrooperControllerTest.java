@@ -58,7 +58,7 @@ public class TrooperControllerTest {
         int trainingTime = 3;
         int trainingCost = 10;
         Weapon weapon = Weapon.SWORD;
-        Response expected = new Response(HttpStatus.BADREQUEST, "Invalid trooper type: null");
+        Response expected = new Response(HttpStatus.BADREQUEST, "Invalid trooper type :null");
 
         // act
         Response actual = trooperController.create(null, trainingTime, trainingCost, weapon);

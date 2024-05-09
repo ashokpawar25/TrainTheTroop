@@ -9,7 +9,7 @@ import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
 import java.util.List;
 
 public class ArmyCampController {
-    ArmyCampService armyCampService;
+    private final ArmyCampService armyCampService;
 
     public ArmyCampController(ArmyCampService armyCampService) {
         this.armyCampService = armyCampService;
@@ -17,7 +17,7 @@ public class ArmyCampController {
 
     public Response addTrooperToCamp(Trooper trooper) {
         armyCampService.addTrooperToCamp(trooper);
-        return new Response(HttpStatus.OK,"Trooper added to camp");
+        return new Response(HttpStatus.OK,"Trooper added to army camp");
     }
 
     public List<Trooper> getTrainedTroopers() {

@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.service;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.BarrackRepository;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
+import com.amaap.trainthetroop.service.exception.BarrackSizeFullException;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,10 +20,10 @@ public class BarrackService {
         this.trooperService = trooperService;
     }
 
-    public void addTroopers(int archerCount,int barbarianCount) throws InsufficientTrooperCountException {
+    public void addTroopers(int archerCount,int barbarianCount) throws InsufficientTrooperCountException, BarrackSizeFullException {
+        if(archerCount+barbarianCount > 10) throw new BarrackSizeFullException("Maximum ten troopers can be added into barrack at a time");
         List<Trooper> troopersToTrain = trooperService.getTroopersWithCount(archerCount,barbarianCount);
-        Queue<Trooper> trooperQueue = new LinkedList<>();
-        trooperQueue.addAll(troopersToTrain);
+        Queue<Trooper> trooperQueue = new LinkedList<>(troopersToTrain);
         barrackRepository.addTroopers(trooperQueue);
     }
 
@@ -32,7 +33,6 @@ public class BarrackService {
 
     public synchronized void trainTheTrooper() throws InterruptedException {
         Queue<Trooper> troopersFromBarrack = barrackRepository.getTroopersFromBarrack();
-
         while (!troopersFromBarrack.isEmpty()) {
             Trooper trooper = troopersFromBarrack.poll();
             int timeToTrain = trooper.getTrainingTime();

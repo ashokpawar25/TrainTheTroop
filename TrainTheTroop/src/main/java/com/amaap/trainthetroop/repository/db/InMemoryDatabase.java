@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Queue;
 
 public interface InMemoryDatabase {
-    Trooper insertIntoTrooperTable(Trooper trooper) throws Exception;
+    Trooper insertIntoTrooperTable(Trooper trooper) ;
 
     List<Trooper> getTroopers();
     List<Trooper> getTroopersWithCount(int archerCount,int barbarianCount) throws InsufficientTrooperCountException;

@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.controller;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.TrooperService;
@@ -18,12 +19,12 @@ public class TrooperController {
         this.trooperService = trooperService;
     }
 
-    public Response create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) throws Exception, InvalidTrooperTypeException {
+    public Response create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) {
         try {
             trooperService.create(type, trainingTime, trainingCost, weapon);
             return new Response(HttpStatus.OK, "Trooper created successfully");
-        } catch (InvalidTrooperTypeException e) {
-            return new Response(HttpStatus.BADREQUEST, "Invalid trooper type: " + type);
+        } catch (InvalidTrooperTypeException | InvalidTrooperDataException exception) {
+            return new Response(HttpStatus.BADREQUEST, exception.getMessage());
         }
     }
 

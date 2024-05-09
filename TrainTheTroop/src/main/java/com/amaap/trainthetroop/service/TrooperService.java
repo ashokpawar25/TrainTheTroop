@@ -3,6 +3,7 @@ package com.amaap.trainthetroop.service;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.repository.TrooperRepository;
@@ -19,7 +20,7 @@ public class TrooperService {
         this.trooperRepository = trooperInMemoryRepository;
     }
 
-    public Trooper create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) throws Exception, InvalidTrooperTypeException {
+    public Trooper create(TroopType type, int trainingTime, int trainingCost, Weapon weapon) throws InvalidTrooperTypeException, InvalidTrooperDataException {
         Trooper trooper = null;
         if (EnumSet.allOf(TroopType.class).contains(type)) {
             if (type.equals(TroopType.ARCHER)) {
@@ -28,7 +29,7 @@ public class TrooperService {
                 trooper = new Barbarian(trainingTime, trainingCost, weapon);
             }
         } else {
-            throw new InvalidTrooperTypeException("Invalid trooper type" + type);
+            throw new InvalidTrooperTypeException("Invalid trooper type :" + type);
         }
 
         return trooperRepository.insert(trooper);

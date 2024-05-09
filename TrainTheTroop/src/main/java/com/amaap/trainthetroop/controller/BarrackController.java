@@ -6,24 +6,23 @@ import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
+import com.amaap.trainthetroop.service.exception.BarrackSizeFullException;
 
 import java.util.Queue;
 
 public class BarrackController {
-    private final TrooperService trooperService;
     private final BarrackService barrackService;
 
-    public BarrackController(TrooperService trooperService, BarrackService barrackService) {
-        this.trooperService = trooperService;
+    public BarrackController( BarrackService barrackService) {
         this.barrackService = barrackService;
     }
 
-    public Response addTrooperToBarrack(int archerCount,int barbarianCont) {
+    public Response addTrooperToBarrack(int archerCount,int barbarianCount) {
         try {
-            barrackService.addTroopers(archerCount,barbarianCont);
+            barrackService.addTroopers(archerCount,barbarianCount);
             return new Response(HttpStatus.OK, "Trooper added into barrack");
-        } catch (InsufficientTrooperCountException e) {
-            throw new RuntimeException(e);
+        } catch (InsufficientTrooperCountException | BarrackSizeFullException e) {
+            return new Response(HttpStatus.BADREQUEST, e.getMessage());
         }
     }
 
@@ -38,7 +37,7 @@ public class BarrackController {
         }
         catch (InterruptedException exception)
         {
-            return new Response(HttpStatus.BADREQUEST,"Interrupt occurred while training the troopers");
+            return new Response(HttpStatus.BADREQUEST,exception.getMessage());
         }
 
     }

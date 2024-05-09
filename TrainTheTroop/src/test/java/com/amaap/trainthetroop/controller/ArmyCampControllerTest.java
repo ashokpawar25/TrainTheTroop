@@ -26,7 +26,8 @@ public class ArmyCampControllerTest {
     void shouldBeAbleToReturnOkResponseWhenTrooperAddedIntoArmyCamp() throws InvalidTrooperDataException {
         // arrange
         Trooper trooper = new Archer(6, 20, Weapon.BOW_AND_ARROW);
-        Response expected = new Response(HttpStatus.OK,"Trooper added to camp");
+        Response expected = new Response(HttpStatus.OK,"Trooper added to army camp");
+
         // act
         Response actual = armyCampController.addTrooperToCamp(trooper);
 
@@ -63,15 +64,15 @@ public class ArmyCampControllerTest {
         // arrange
         Trooper trooper1 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
         Trooper trooper2 = new Archer(6, 20, Weapon.BOW_AND_ARROW);
-        List<Trooper> expectedTrainedTroopers = List.of(trooper1,trooper2);
+        List<Trooper> expected = List.of(trooper1,trooper2);
 
         // act
         armyCampController.addTrooperToCamp(trooper1);
         armyCampController.addTrooperToCamp(trooper2);
-        List<Trooper> actualTrainedTroopers = armyCampController.getTrainedTroopers();
+        List<Trooper> actual = armyCampController.getTrainedTroopers();
 
         // assert
-        assertEquals(expectedTrainedTroopers, actualTrainedTroopers);
+        assertEquals(expected, actual);
     }
 
 

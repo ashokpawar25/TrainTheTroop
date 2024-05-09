@@ -1,12 +1,13 @@
 package com.amaap.trainthetroop.repository.Impl;
 
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
+import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.repository.db.InMemoryDatabase;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 
 import java.util.List;
 
-public class InMemoryTrooperRepository implements com.amaap.trainthetroop.repository.TrooperRepository {
+public class InMemoryTrooperRepository implements TrooperRepository {
     private final InMemoryDatabase inMemoryDatabase;
 
     public InMemoryTrooperRepository(InMemoryDatabase inMemoryDatabase) {
@@ -14,7 +15,7 @@ public class InMemoryTrooperRepository implements com.amaap.trainthetroop.reposi
     }
 
     @Override
-    public Trooper insert(Trooper trooper) throws Exception {
+    public Trooper insert(Trooper trooper) {
         return inMemoryDatabase.insertIntoTrooperTable(trooper);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ArmyCampService {
 
-    ArmyCampRepository armyCampRepository;
+    private final ArmyCampRepository armyCampRepository;
 
     public ArmyCampService(ArmyCampRepository armyCampRepository) {
         this.armyCampRepository = armyCampRepository;

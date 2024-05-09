@@ -11,8 +11,7 @@ import java.util.*;
 public class FakeInMemoryDatabase implements InMemoryDatabase {
     List<Trooper> trooperList = new ArrayList<>();
     Queue<Trooper> trooperInBarrack = new LinkedList<>();
-    List<Trooper> trainedTroopers = new ArrayList<>();
-    int trooperI;
+    List<Trooper> trooperInArmyCamp = new ArrayList<>();
 
     @Override
     public Trooper insertIntoTrooperTable(Trooper trooper) {
@@ -56,11 +55,11 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
 
     @Override
     public void insertIntoArmyCampTable(Trooper trooper) {
-        trainedTroopers.add(trooper);
+        trooperInArmyCamp.add(trooper);
     }
 
     @Override
     public List<Trooper> getTroopersFromArmyCamp() {
-        return trainedTroopers;
+        return trooperInArmyCamp;
     }
 }

@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -53,7 +55,6 @@ public class BarrackControllerTest {
         Response expected = new Response(HttpStatus.BADREQUEST, "Maximum ten troopers can be added into barrack at a time");
 
         // act
-        List<Trooper> troopers = trooperService.getTroopers();
         Response actual = barrackController.addTrooperToBarrack(6,6);
 
         // assert
@@ -63,16 +64,17 @@ public class BarrackControllerTest {
     @Test
     void shouldBeAbleToGetTroopersFromBarrack() throws Exception, InvalidTrooperTypeException {
         // arrange
-        trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
-        trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        Trooper trooper1 = trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
+        Trooper trooper2 = trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
+        List<Trooper> troopers = List.of(trooper1,trooper2);
+        Queue<Trooper> expected = new LinkedList<>(troopers);
 
         // act
-        List<Trooper> troopers = trooperService.getTroopers();
-        Response actual = barrackController.addTrooperToBarrack(1,1);
-        Queue<Trooper> troopersToTrain = barrackController.getTroopers();
+        barrackController.addTrooperToBarrack(1,1);
+        Queue<Trooper> actual = barrackController.getTroopers();
 
         // assert
-        assertEquals(2, troopersToTrain.size());
+        assertEquals(expected,actual);
     }
 
     @Test

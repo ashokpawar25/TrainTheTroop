@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.service;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
@@ -8,10 +9,14 @@ import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrainingCostException;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrainingTimeException;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidWeaponException;
+import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.Impl.InMemoryTrooperRepository;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,7 +24,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrooperServiceTest {
-    TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
+    TrooperService trooperService ;
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        trooperService = injector.getInstance(TrooperService.class);
+    }
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws InvalidTrooperTypeException, InvalidTrooperDataException {

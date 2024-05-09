@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.repository.db;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
@@ -8,6 +9,9 @@ import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataE
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,7 +21,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FakeInMemoryDatabaseTest {
 
-    FakeInMemoryDatabase fakeInMemoryDatabase = new FakeInMemoryDatabase();
+    FakeInMemoryDatabase fakeInMemoryDatabase;
+
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        fakeInMemoryDatabase = injector.getInstance(FakeInMemoryDatabase.class);
+    }
 
     @Test
     void shouldBeAbleToCreateTrooperOfTypeArcher() throws Exception {

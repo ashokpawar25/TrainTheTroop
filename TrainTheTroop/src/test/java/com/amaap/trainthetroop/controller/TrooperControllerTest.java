@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.controller;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
@@ -11,6 +12,9 @@ import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperC
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -20,8 +24,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TrooperControllerTest {
 
-    TrooperController trooperController = new TrooperController(new TrooperService(
-            new InMemoryTrooperRepository(new FakeInMemoryDatabase())));
+    TrooperController trooperController ;
+
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        trooperController = injector.getInstance(TrooperController.class);
+    }
 
     @Test
     void shouldBeAbleToGetOkResponseWhenCreatesTrooperOfTypeArcher() {

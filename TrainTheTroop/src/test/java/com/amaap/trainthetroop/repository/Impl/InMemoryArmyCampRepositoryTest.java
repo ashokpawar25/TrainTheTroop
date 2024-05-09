@@ -1,11 +1,15 @@
 package com.amaap.trainthetroop.repository.Impl;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +18,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryArmyCampRepositoryTest {
 
-    InMemoryArmyCampRepository inMemoryArmyCampRepository = new InMemoryArmyCampRepository(new FakeInMemoryDatabase());
+    InMemoryArmyCampRepository inMemoryArmyCampRepository;
+
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        inMemoryArmyCampRepository = injector.getInstance(InMemoryArmyCampRepository.class);
+    }
     @Test
     void shouldBeAbleToAddTrooperInArmyCamp() throws InvalidTrooperDataException {
         // arrange

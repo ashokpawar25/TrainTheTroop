@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.repository.Impl;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
@@ -7,6 +8,9 @@ import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataE
 import com.amaap.trainthetroop.domain.model.factory.TrooperFactory;
 import com.amaap.trainthetroop.repository.BarrackRepository;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Queue;
@@ -14,7 +18,14 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryBarrackRepositoryTest {
-    BarrackRepository barrackRepository = new InMemoryBarrackRepository(new FakeInMemoryDatabase());
+    BarrackRepository barrackRepository ;
+
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        barrackRepository = injector.getInstance(BarrackRepository.class);
+    }
 
     @Test
     void shouldBeAbleToAddTrooperIntoBarrack() throws InvalidTrooperDataException {

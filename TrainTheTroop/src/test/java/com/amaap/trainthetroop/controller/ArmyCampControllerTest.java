@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.controller;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.controller.dto.HttpStatus;
 import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Archer;
@@ -11,6 +12,9 @@ import com.amaap.trainthetroop.repository.Impl.InMemoryArmyCampRepository;
 import com.amaap.trainthetroop.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,8 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArmyCampControllerTest {
 
-    ArmyCampController armyCampController = new ArmyCampController(new ArmyCampService(
-            new InMemoryArmyCampRepository(new FakeInMemoryDatabase())));
+    ArmyCampController armyCampController ;
+
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        armyCampController = injector.getInstance(ArmyCampController.class);
+    }
 
     @Test
     void shouldBeAbleToReturnOkResponseWhenTrooperAddedIntoArmyCamp() throws InvalidTrooperDataException {

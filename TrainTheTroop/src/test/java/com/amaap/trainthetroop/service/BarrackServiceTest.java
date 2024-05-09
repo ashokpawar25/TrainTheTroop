@@ -1,5 +1,6 @@
 package com.amaap.trainthetroop.service;
 
+import com.amaap.trainthetroop.AppModule;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.domain.model.entity.exception.InvalidTrooperDataException;
 import com.amaap.trainthetroop.domain.model.valueobject.Weapon;
@@ -11,6 +12,9 @@ import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperC
 import com.amaap.trainthetroop.service.exception.BarrackSizeFullException;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.Duration;
@@ -20,9 +24,15 @@ import java.util.Queue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BarrackServiceTest {
-    TrooperService trooperService = new TrooperService(new InMemoryTrooperRepository(new FakeInMemoryDatabase()));
-    ArmyCampService armyCampService = new ArmyCampService(new InMemoryArmyCampRepository(new FakeInMemoryDatabase()));
-    BarrackService barrackService = new BarrackService(new InMemoryBarrackRepository(new FakeInMemoryDatabase()), armyCampService,trooperService);
+    TrooperService trooperService ;
+    BarrackService barrackService ;
+    @BeforeEach
+    void setUp()
+    {
+        Injector injector = Guice.createInjector(new AppModule());
+        barrackService = injector.getInstance(BarrackService.class);
+        trooperService = injector.getInstance(TrooperService.class);
+    }
 
     @Test
     void shouldBeAbleToAddTrooperIntoBarrack() throws Exception, InvalidTrooperTypeException {
@@ -50,17 +60,17 @@ class BarrackServiceTest {
             trooperService.create(TroopType.ARCHER, 6, 20, Weapon.BOW_AND_ARROW);
             trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         }
-        int expectedTrainingTime = 45;
+        long expected = 45;
 
         // act
         barrackService.addTroopers(5,5);
         LocalTime trainingStartTime = LocalTime.now();
         barrackService.trainTheTrooper();
         LocalTime trainingEndTime = LocalTime.now();
-        long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
+        long actual = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
 
         // assert
-        assertEquals(expectedTrainingTime,actualTrainingTime);
+        assertEquals(expected,actual);
     }
 
 }

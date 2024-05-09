@@ -53,6 +53,9 @@ the Input-Output section shown for the problem.
 2. You should demonstrate the working software by building a console application or writing test program that exercises the sample
 inputs, for this purpose you may use jUnit or any other testing framework.
 
+![image](https://github.com/ashokpawar25/TrainTheTroop/assets/117933840/56e63388-a4ee-4860-9d82-8228cf3a1f5b)
+
+
 # domain Package - It consist domain models and domain services
 
 ## Trooper Class

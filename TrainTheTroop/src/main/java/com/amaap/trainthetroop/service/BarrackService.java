@@ -4,6 +4,7 @@ import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.BarrackRepository;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
 import com.amaap.trainthetroop.service.exception.BarrackSizeFullException;
+import jakarta.inject.Inject;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class BarrackService {
     BarrackRepository barrackRepository;
     ArmyCampService armyCampService;
     TrooperService trooperService;
-
+    @Inject
     public BarrackService(BarrackRepository barrackRepository, ArmyCampService armyCampService,TrooperService trooperService) {
         this.barrackRepository = barrackRepository;
         this.armyCampService = armyCampService;
@@ -36,7 +37,7 @@ public class BarrackService {
         while (!troopersFromBarrack.isEmpty()) {
             Trooper trooper = troopersFromBarrack.poll();
             int timeToTrain = trooper.getTrainingTime();
-//            Thread.sleep(timeToTrain * 1000L);
+            Thread.sleep(timeToTrain * 1000L);
             armyCampService.addTrooperToCamp(trooper);
         }
     }

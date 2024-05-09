@@ -51,7 +51,6 @@ class BarrackServiceTest {
             trooperService.create(TroopType.BARBARIAN, 3, 10, Weapon.SWORD);
         }
         int expectedTrainingTime = 45;
-        int expectedCountOfTrooperInArmyCamp = 10;
 
         // act
         barrackService.addTroopers(5,5);
@@ -61,7 +60,7 @@ class BarrackServiceTest {
         long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
 
         // assert
-//        assertEquals(expectedTrainingTime,actualTrainingTime);
+        assertEquals(expectedTrainingTime,actualTrainingTime);
     }
 
 }

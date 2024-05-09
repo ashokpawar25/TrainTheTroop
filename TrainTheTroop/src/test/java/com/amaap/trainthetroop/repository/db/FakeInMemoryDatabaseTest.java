@@ -1,4 +1,4 @@
-package com.amaap.trainthetroop.repository.Impl.db;
+package com.amaap.trainthetroop.repository.db;
 
 import com.amaap.trainthetroop.domain.model.entity.Archer;
 import com.amaap.trainthetroop.domain.model.entity.Barbarian;

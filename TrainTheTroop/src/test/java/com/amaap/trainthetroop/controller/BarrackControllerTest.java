@@ -95,7 +95,7 @@ public class BarrackControllerTest {
         long actualTrainingTime = Duration.between(trainingStartTime, trainingEndTime).getSeconds();
 
         // assert
-//        assertEquals(expectedTrainingTime,actualTrainingTime);
+        assertEquals(expectedTrainingTime,actualTrainingTime);
         assertEquals(expected,actual);
     }
 }

@@ -9,13 +9,14 @@ import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperC
 import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.service.exception.InvalidTrooperTypeException;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import jakarta.inject.Inject;
 
 import java.util.EnumSet;
 import java.util.List;
 
 public class TrooperService {
     private final TrooperRepository trooperRepository;
-
+    @Inject
     public TrooperService(TrooperRepository trooperInMemoryRepository) {
         this.trooperRepository = trooperInMemoryRepository;
     }

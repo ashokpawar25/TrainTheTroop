@@ -5,13 +5,14 @@ import com.amaap.trainthetroop.domain.model.entity.Barbarian;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.ArmyCampRepository;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class ArmyCampService {
 
     private final ArmyCampRepository armyCampRepository;
-
+    @Inject
     public ArmyCampService(ArmyCampRepository armyCampRepository) {
         this.armyCampRepository = armyCampRepository;
     }

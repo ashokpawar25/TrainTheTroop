@@ -4,12 +4,13 @@ import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.repository.TrooperRepository;
 import com.amaap.trainthetroop.repository.db.InMemoryDatabase;
 import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperCountException;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class InMemoryTrooperRepository implements TrooperRepository {
     private final InMemoryDatabase inMemoryDatabase;
-
+    @Inject
     public InMemoryTrooperRepository(InMemoryDatabase inMemoryDatabase) {
         this.inMemoryDatabase = inMemoryDatabase;
     }

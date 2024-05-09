@@ -7,12 +7,13 @@ import com.amaap.trainthetroop.repository.db.impl.exception.InsufficientTrooperC
 import com.amaap.trainthetroop.service.BarrackService;
 import com.amaap.trainthetroop.service.TrooperService;
 import com.amaap.trainthetroop.service.exception.BarrackSizeFullException;
+import jakarta.inject.Inject;
 
 import java.util.Queue;
 
 public class BarrackController {
     private final BarrackService barrackService;
-
+    @Inject
     public BarrackController( BarrackService barrackService) {
         this.barrackService = barrackService;
     }

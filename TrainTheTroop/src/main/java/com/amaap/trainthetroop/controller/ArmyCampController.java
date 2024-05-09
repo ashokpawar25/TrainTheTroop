@@ -5,12 +5,13 @@ import com.amaap.trainthetroop.controller.dto.Response;
 import com.amaap.trainthetroop.domain.model.entity.Trooper;
 import com.amaap.trainthetroop.service.ArmyCampService;
 import com.amaap.trainthetroop.domain.model.valueobject.TroopType;
+import jakarta.inject.Inject;
 
 import java.util.List;
 
 public class ArmyCampController {
     private final ArmyCampService armyCampService;
-
+    @Inject
     public ArmyCampController(ArmyCampService armyCampService) {
         this.armyCampService = armyCampService;
     }
